@@ -1,4 +1,4 @@
-### Linting
+### SOAL 1
 
 - buatlah query untuk menyajikan laporan 10 terbanyak setiap bulannya per poli / klinik
 
