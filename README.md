@@ -1,13 +1,16 @@
 ### Linting
 
-We recommend using [eslint-plugin-sql](https://github.com/gajus/eslint-plugin-sql#eslint-plugin-sql-rules-no-unsafe-query) to prevent cases in which the SQL tag is forgotten to be added in front of template strings. Eslint will fail if you write SQL queries without `sql` tag in front of the string.
+- buatlah query untuk menyajikan laporan 10 terbanyak setiap bulannya per poli / klinik
+
 
 ```sql
-`SELECT 1`
-// fails - Message: Use "sql" tag
-
-sql`SELECT 1`
-// passes
+SELECT master_unit.unit_nama AS poli, CONCAT(master_diagnosa.diagnosa_kode, '  ', master_diagnosa.diagnosa_name)  AS Diagnosa ,COUNT(*) AS jumlah FROM diagnosa_pasien
+INNER JOIN master_diagnosa ON diagnosa_pasien.m_diagnosa_id = master_diagnosa.diagnosa_id
+INNER JOIN kunjungan_pasien ON diagnosa_pasien.kunjungan_id = kunjungan_pasien.pendaftaran_id
+INNER JOIN master_unit ON kunjungan_pasien.m_unit_id = master_unit.unit_id
+GROUP BY poli,Diagnosa,diagnosa_pasien.m_diagnosa_id
+ORDER BY jumlah DESC,master_unit.unit_nama ASC
+LIMIT 10
 ```
 
 <br><br>
