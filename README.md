@@ -13,6 +13,9 @@ ORDER BY jumlah DESC,master_unit.unit_nama ASC
 LIMIT 10
 ```
 
+![Screenshot 2022-10-01 061949](https://user-images.githubusercontent.com/37862470/193368490-ea6b3f64-8f96-4a27-ba21-2c497ad8493e.png)
+
+
 <br>
 
 ### SOAL 2 SQL
@@ -28,6 +31,8 @@ GROUP BY poli,Diagnosa,diagnosa_pasien.m_diagnosa_id
 ORDER BY jumlah DESC,master_pasien.pasien_kota ASC
 LIMIT 10
 ```
+
+![Screenshot 2022-10-01 061849](https://user-images.githubusercontent.com/37862470/193368437-abca4e19-3af9-4587-b935-f452ebbee30c.png)
 
 <br>
 
