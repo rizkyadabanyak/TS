@@ -14,7 +14,8 @@ LIMIT 10
 ```
 
 <br>
-### SOAL 2 SQL
+
+### SOAL 1 SQL
 
 - buatlah query untuk menyajikan laporan 10 terbanyak setiap bulannya berdasarkan demograsi kota pasien pendaftar
 
