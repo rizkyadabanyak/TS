@@ -15,18 +15,45 @@ LIMIT 10
 
 <br>
 
-### SOAL 1 SQL
+### SOAL 2 SQL
 
 - buatlah query untuk menyajikan laporan 10 terbanyak setiap bulannya berdasarkan demograsi kota pasien pendaftar
 
 ```sql
-SELECT master_unit.unit_nama AS poli, CONCAT(master_diagnosa.diagnosa_kode, '  ', master_diagnosa.diagnosa_name)  AS Diagnosa ,COUNT(*) AS jumlah FROM diagnosa_pasien
+SELECT master_pasien.pasien_kota AS poli, CONCAT(master_diagnosa.diagnosa_kode, '  ', master_diagnosa.diagnosa_name)  AS Diagnosa ,COUNT(*) AS jumlah FROM diagnosa_pasien
+INNER JOIN master_diagnosa ON diagnosa_pasien.m_diagnosa_id = master_diagnosa.diagnosa_id
+INNER JOIN kunjungan_pasien ON diagnosa_pasien.kunjungan_id = kunjungan_pasien.pendaftaran_id
+INNER JOIN master_pasien ON kunjungan_pasien.m_pasien_id = master_pasien.pasien_id
+GROUP BY poli,Diagnosa,diagnosa_pasien.m_diagnosa_id
+ORDER BY jumlah DESC,master_pasien.pasien_kota ASC
+LIMIT 10
+```
+
+<br>
+
+### SOAL 3 SQL
+
+- buatlah query untuk menyajikan laporan pendaftaran poli seperti berikut
+
+```sql
+SELECT kunjungan_id AS NO,
+master_unit.unit_nama AS poli,
+master_pasien.pasien_nama AS nama_pasien,
+master_pasien.pasien_kota AS alamat, 
+master_pembayaran.bayar_nama AS cara_bayar,
+GROUP_CONCAT(CONCAT(diagnosapasien_jenis, '|', master_diagnosa.diagnosa_name)  SEPARATOR ', ') AS diagnosa,
+master_dokter.pegawai_nama AS dokter,
+kunjungan_pasien.daftar_tanggal AS tanggal_masuk,
+kunjungan_pasien.pulang_tanggal AS tanggal_pulang
+FROM diagnosa_pasien 
 INNER JOIN master_diagnosa ON diagnosa_pasien.m_diagnosa_id = master_diagnosa.diagnosa_id
 INNER JOIN kunjungan_pasien ON diagnosa_pasien.kunjungan_id = kunjungan_pasien.pendaftaran_id
 INNER JOIN master_unit ON kunjungan_pasien.m_unit_id = master_unit.unit_id
-GROUP BY poli,Diagnosa,diagnosa_pasien.m_diagnosa_id
-ORDER BY jumlah DESC,master_unit.unit_nama ASC
-LIMIT 10
+INNER JOIN master_pasien ON kunjungan_pasien.m_pasien_id = master_pasien.pasien_id
+INNER JOIN master_pembayaran ON kunjungan_pasien.m_bayar_id = master_pembayaran.bayar_id
+INNER JOIN master_dokter ON kunjungan_pasien.m_dokter_id = master_dokter.pegawai_id
+GROUP BY NO,poli,nama_pasien,alamat
+ORDER BY tanggal_masuk DESC,poli ASC,cara_bayar ASC
 ```
 
 <br><br>
