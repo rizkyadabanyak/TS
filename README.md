@@ -1,3 +1,16 @@
+### Linting
+
+We recommend using [eslint-plugin-sql](https://github.com/gajus/eslint-plugin-sql#eslint-plugin-sql-rules-no-unsafe-query) to prevent cases in which the SQL tag is forgotten to be added in front of template strings. Eslint will fail if you write SQL queries without `sql` tag in front of the string.
+
+```sql
+`SELECT 1`
+// fails - Message: Use "sql" tag
+
+sql`SELECT 1`
+// passes
+```
+
+<br><br>
 <p align="center">
     <b>PRINT SCHEDULE</b>
 </p>
