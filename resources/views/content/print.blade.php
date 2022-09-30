@@ -91,36 +91,6 @@
 //            dd($tmpDay);
 //            ?>
 
-
-
-
-
-
-
-{{--            @foreach($a->employeePoli as $e)--}}
-
-{{--                <?php--}}
-{{--                    foreach ($e->schedules as $schedule){--}}
-{{--                        $tmpDay[$schedule->day_id] = $schedule;--}}
-{{--                    }--}}
-{{--//                    dd($tmpDay);--}}
-{{--                ?>--}}
-{{--                <tr>--}}
-{{--                    <td></td>--}}
-{{--                    <td>{{$e->employees->name}}</td>--}}
-
-{{--                    @foreach($tmpDay as $day)--}}
-{{--                        @if($day != '')--}}
-
-{{--                            <td>{{$day->first}} - {{$day->last}}</td>--}}
-{{--                        @else--}}
-
-{{--                            <td></td>--}}
-{{--                        @endif--}}
-{{--                    @endforeach--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
-
         @endforeach
 
         </tbody>
