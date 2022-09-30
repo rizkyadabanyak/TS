@@ -1,7 +1,22 @@
-### SOAL 1
+### SOAL 1 SQL
 
 - buatlah query untuk menyajikan laporan 10 terbanyak setiap bulannya per poli / klinik
 
+
+```sql
+SELECT master_unit.unit_nama AS poli, CONCAT(master_diagnosa.diagnosa_kode, '  ', master_diagnosa.diagnosa_name)  AS Diagnosa ,COUNT(*) AS jumlah FROM diagnosa_pasien
+INNER JOIN master_diagnosa ON diagnosa_pasien.m_diagnosa_id = master_diagnosa.diagnosa_id
+INNER JOIN kunjungan_pasien ON diagnosa_pasien.kunjungan_id = kunjungan_pasien.pendaftaran_id
+INNER JOIN master_unit ON kunjungan_pasien.m_unit_id = master_unit.unit_id
+GROUP BY poli,Diagnosa,diagnosa_pasien.m_diagnosa_id
+ORDER BY jumlah DESC,master_unit.unit_nama ASC
+LIMIT 10
+```
+
+<br>
+### SOAL 2 SQL
+
+- buatlah query untuk menyajikan laporan 10 terbanyak setiap bulannya berdasarkan demograsi kota pasien pendaftar
 
 ```sql
 SELECT master_unit.unit_nama AS poli, CONCAT(master_diagnosa.diagnosa_kode, '  ', master_diagnosa.diagnosa_name)  AS Diagnosa ,COUNT(*) AS jumlah FROM diagnosa_pasien
