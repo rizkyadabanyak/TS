@@ -31,14 +31,21 @@
         <tbody>
         @foreach($data as $a)
             <?php
+                $indexEmployee = count($a->employeePoli);
             $tmpDay = [];
-            $s =1;
-
-            foreach ($days as $day){
-                $tmpDay[$s++] = '';
+            $get = $a->employeePoli;
+            $week = [];
+            for ($i=0;$i<$indexEmployee;$i++){
+                $s =1;
+                foreach ($days as $day){
+                    $week[$s++] = '';
+                }
+                $tmpDay[$i] = [
+                    'employee' => $get[$i],
+                    'days' =>$week
+                ];
             }
-            $tmp = [];
-            $i = 0;
+//            dd($tmpDay);
             ?>
 
             <tr>
@@ -52,28 +59,70 @@
                 <td></td>
                 <td></td>
             </tr>
-            @foreach($a->employeePoli as $e)
+
+            @for($a=0;$a<count($tmpDay);$a++)
                 <?php
-                    foreach ($e->schedules as $schedule){
-                        $tmpDay[$schedule->day_id] = $schedule;
-                    }
+//                    dd($tmpDay[$a]['days']);
+//                    dd($tmpDay[$a]['employee']->schedules);
+                foreach ($tmpDay[$a]['employee']->schedules as $schedule ){
+//                    dd($tmpDay[$a]['days'][$schedule->id] = $schedule);
+                    $tmpDay[$a]['days'][$schedule->day_id] = $schedule;
+
+                }
+
                 ?>
                 <tr>
                     <td></td>
-                    <td>{{$e->employees->name}}</td>
 
-                    @foreach($tmpDay as $day)
-                        @if($day != '')
+                    <td>{{$tmpDay[$a]['employee']->employees->name}}</td>
+                    <td>{{($tmpDay[$a]['days'][1] != '' ) ? $tmpDay[$a]['days'][1]->first.' - '.$tmpDay[$a]['days'][1]->last : ''}}</td>
+                    <td>{{($tmpDay[$a]['days'][2] != '' ) ? $tmpDay[$a]['days'][2]->first.' - '.$tmpDay[$a]['days'][2]->last : ''}}</td>
+                    <td>{{($tmpDay[$a]['days'][3] != '' ) ? $tmpDay[$a]['days'][3]->first.' - '.$tmpDay[$a]['days'][3]->last : ''}}</td>
+                    <td>{{($tmpDay[$a]['days'][4] != '' ) ? $tmpDay[$a]['days'][4]->first.' - '.$tmpDay[$a]['days'][4]->last : ''}}</td>
+                    <td>{{($tmpDay[$a]['days'][5] != '' ) ? $tmpDay[$a]['days'][5]->first.' - '.$tmpDay[$a]['days'][5]->last : ''}}</td>
+                    <td>{{($tmpDay[$a]['days'][6] != '' ) ? $tmpDay[$a]['days'][6]->first.' - '.$tmpDay[$a]['days'][6]->last : ''}}</td>
+                    <td>{{($tmpDay[$a]['days'][7] != '' ) ? $tmpDay[$a]['days'][7]->first.' - '.$tmpDay[$a]['days'][7]->last : ''}}</td>
 
-                            <td>{{$day->first}} - {{$day->last}}</td>
-                        @else
-
-                            <td></td>
-                        @endif
-                    @endforeach
                 </tr>
-            @endforeach
+
+            @endfor
+
+<!--            --><?php
+//            dd($tmpDay);
+//            ?>
+
+
+
+
+
+
+
+{{--            @foreach($a->employeePoli as $e)--}}
+
+{{--                <?php--}}
+{{--                    foreach ($e->schedules as $schedule){--}}
+{{--                        $tmpDay[$schedule->day_id] = $schedule;--}}
+{{--                    }--}}
+{{--//                    dd($tmpDay);--}}
+{{--                ?>--}}
+{{--                <tr>--}}
+{{--                    <td></td>--}}
+{{--                    <td>{{$e->employees->name}}</td>--}}
+
+{{--                    @foreach($tmpDay as $day)--}}
+{{--                        @if($day != '')--}}
+
+{{--                            <td>{{$day->first}} - {{$day->last}}</td>--}}
+{{--                        @else--}}
+
+{{--                            <td></td>--}}
+{{--                        @endif--}}
+{{--                    @endforeach--}}
+{{--                </tr>--}}
+{{--            @endforeach--}}
+
         @endforeach
+
         </tbody>
     </table>
 </div>
