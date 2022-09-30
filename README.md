@@ -56,6 +56,9 @@ GROUP BY NO,poli,nama_pasien,alamat
 ORDER BY tanggal_masuk DESC,poli ASC,cara_bayar ASC
 ```
 
+![Screenshot 2022-10-01 061729](https://user-images.githubusercontent.com/37862470/193368367-7de2c78d-305d-4197-b409-c1df3b93deb5.png)
+
+
 <br><br>
 <p align="center">
     <b>PRINT SCHEDULE</b>
